@@ -1,3 +1,4 @@
+#!/bin/python3
 import requests
 from bs4 import BeautifulSoup
 
@@ -35,7 +36,7 @@ def parse_mittag(text: str) -> [RestaurantMenu]:
 
 def parse_menu(path_to_full_menu) -> str:
     individual_menu = BeautifulSoup(get(path_to_full_menu), features="html.parser")
-    menu_html = individual_menu.find("div", {"class": "current-menu"}).find_all(text=True)
+    menu_html = individual_menu.find("div", {"class": "current-menu"}).find_all(string=True)
     menu_html = [x.strip() for x in menu_html if x != ' ']
     menu_text = '\n'.join(menu_html)
     return menu_text
